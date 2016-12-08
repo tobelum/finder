@@ -94,7 +94,7 @@
 
                 //alert(username);
 
-                pageUrl="http://52.89.116.249/~tobel.eze-okoli/carpool/usersajax.php?cmd=1&username="+username+"&firstname="+firstname+"&lastname="+lastname+"&email="+email+"&password="+password+"&phone="+phone+"&organization="+organization;
+                pageUrl="http://52.89.116.249/~tobel.eze-okoli/finder/usersajax.php?cmd=1&username="+username+"&firstname="+firstname+"&lastname="+lastname+"&email="+email+"&password="+password+"&phone="+phone+"&organization="+organization;
                 $.ajax(pageUrl,{async:true,complete:addUserComplete});
                 alert("Thank you for registering, you can now sign in using your details.");
                 //prompt('url',pageUrl);
@@ -110,7 +110,7 @@
                 console.log(xhr.responseText);
                 var obj= $.parseJSON(xhr.responseText);
                 
-                alert("object is "+obj);
+                //alert("object is "+obj);
                 
                 //alert("hey");
                 if(obj.result==0){
@@ -129,7 +129,7 @@
                 username=$("#loguser").val();
                 password=$("#logpassword").val();
 
-                pageUrl="http://52.89.116.249/~tobel.eze-okoli/carpool/usersajax.php?cmd=2&username="+username+"&password="+password;
+                pageUrl="http://52.89.116.249/~tobel.eze-okoli/finder/usersajax.php?cmd=2&username="+username+"&password="+password;
                 $.ajax(pageUrl,{async:true,complete:logUserComplete});
                 alert("Thank you for returning, please wait a moment while we retrieve your information.");
                 //prompt('url',pageUrl);
