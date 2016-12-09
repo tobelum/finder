@@ -135,6 +135,7 @@ types: [type]
 console.log(map);
 service = new google.maps.places.PlacesService(map);
 service.search(request, createMarkersATM);
+alert("Scroll down to view the search results");
 }
 
 
@@ -160,6 +161,7 @@ types: [type]
 console.log(map);
 service = new google.maps.places.PlacesService(map);
 service.search(request, createMarkers);
+alert("Scroll down to view the map");
 }
 
 function findHotel() {
@@ -184,6 +186,7 @@ types: [type]
 console.log(map);
 service = new google.maps.places.PlacesService(map);
 service.search(request, createMarkersHotel);
+alert("Scroll down to view the search results");
 }
 
 function findStore() {
@@ -208,6 +211,7 @@ types: [type]
 console.log(map);
 service = new google.maps.places.PlacesService(map);
 service.search(request, createMarkers);
+alert("Scroll down to view the map");
 }
 
 function findBar() {
@@ -232,6 +236,7 @@ types: [type]
 console.log(map);
 service = new google.maps.places.PlacesService(map);
 service.search(request, createMarkers);
+alert("Scroll down to view the map");
 }
 
 function findCafe() {
@@ -256,6 +261,7 @@ types: [type]
 console.log(map);
 service = new google.maps.places.PlacesService(map);
 service.search(request, createMarkers);
+alert("Scroll down to view the map");
 }
 
 // create markers (from 'findPlaces' function)
