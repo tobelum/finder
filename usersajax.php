@@ -16,10 +16,15 @@
 		sendMsg();
 		break;
 
+		case 4:
+		sendMessage();
+		break;
+
 		default:
 		echo "wrong cmd";
 		break;
 	}
+
 
 function addUser() {
 	if (($_REQUEST['username']=="") || ($_REQUEST['firstname']=="") || ($_REQUEST['lastname']=="") || ($_REQUEST['email']=="")
@@ -73,6 +78,27 @@ function logUser(){
 	 echo '{"result":1, "message": "User sucessfully logged in"}';	
 	}
 }
+function sendMessage(){
+	if(($_REQUEST['date']=="") || ($_REQUEST['title']=="") || ($_REQUEST['message']=="")){
+		echo '{"result":0,"message":"All required fields were not filled"}';
+		return;
+	}
+
+	include_once("users.php");
+	$obj = new users();
+	$date=$_REQUEST['date'];
+	$title=$_REQUEST['title'];
+	$message=$_REQUEST['message'];
+
+	$a = $obj->sendMessage($date,$title,$message);
+
+	if(!$a){
+		echo '{"result":0,"message":"Could not send message"}';
+	}else{
+		echo '{"result":1,"message":"Message sent."}';
+	}
+}
+
 
 function sendMsg() {
 	if (($_REQUEST['date']=="") || ($_REQUEST['title']=="") || ($_REQUEST['message']=="")) {
@@ -87,7 +113,7 @@ function sendMsg() {
 	$message = $_REQUEST['message'];
 
 	
-	$a = $obj->newMsg($date,$title,$message);
+	$a = $obj->sendMsg($date,$title,$message);
 
 	if (!$a) {
 		echo '{"result":0 ,"message": "Could not send Message"}';
@@ -98,6 +124,7 @@ function sendMsg() {
 	}
 	
 }
+
 
 
 ?>

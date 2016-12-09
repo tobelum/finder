@@ -71,29 +71,27 @@
 	<script>
 		    function sendMsgComplete(xhr, status){
                 //alert("status is" + status);
-
+                alert("there");
                 if(status!="success"){
                     alert("status is "+status);
                     //spanSignup.innerHTML="Sign Up Unsuccessful";
                     return;
                 }
-                //alert(xhr.responseText);
+                alert(xhr.responseText);
                 //console.log(obj);
-                //var obj= $.parseJSON(xhr.responseText);
+                var obj= $.parseJSON(xhr.responseText);
                 console.log(xhr.responseText);
-                //alert("hey");
-                // if(obj.result==0){
-                //     alert("server response: "+obj.message);
+                alert("hey");
+                if(obj.result==0){
+                    alert("server response: "+obj.message);
                     
-                //     spanSignup.innerHTML=obj.message;
-                //     console.log(obj.message);
-                // }else{
-                //     alert("Welcome, you have successfully registered.");
-                //     window.location="home.html";
+                    spanSignup.innerHTML=obj.message;
+                    console.log(obj.message);
+                }else{
+                    alert("Your message has been sent.");
                     
-                // }
-                alert("Your message had been sent.");
-                window.location="contact.html";
+                }
+                
             }
 
            function sendMsg(){
@@ -101,12 +99,13 @@
                 title=$("#title").val();
                 message=$("#message").val();
 
-                //alert(username);
+                alert(date);
 
-                pageUrl="http://52.89.116.249/~tobel.eze-okoli/finder/usersajax.php?cmd=3&date="+date+"&title="+title+"&message="+message;
+                pageUrl="http://52.89.116.249/~tobel.eze-okoli/finder/usersajax.php?cmd=4&date="+date+"&title="+title+"&message="+message;
                 $.ajax(pageUrl,{async:true,complete:sendMsgComplete});
                 // alert("Thank you for registering, you can now sign in using your details.");
                 //prompt('url',pageUrl);
+                alert("here");
            }
 	</script>
 
@@ -152,7 +151,7 @@
 							<div class="row">
 								<div class="col-md-6">
 									<div class="form-group">
-										<input type="text" class="form-control" placeholder="Date" id="date">
+										<input type="date" class="form-control" placeholder="Date" id="date">
 									</div>
 								</div>
 								<div class="col-md-6">

@@ -37,4 +37,11 @@ class users extends adb{
         echo ($close);
         //$outcome = curl_close($pass);
      }
+
+      function sendMessage($date='none',$title='none',$message='none'){
+
+          $strQuery = "insert into message SET mdate = '$date',title = '$title',content = '$message'";
+          echo $strQuery;
+          return $this->query ($strQuery);
+     }
    }
