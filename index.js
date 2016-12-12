@@ -110,17 +110,16 @@ infos[i].close();
       //                         'Error: Your browser doesn\'t support geolocation.');
       // }
 
+
+// find custom places function
 function findATM() {
-	// myLocation();
 // prepare variables (filter)
-// console.log(lat);
-// console.log(lng);
 var type = "atm";
 console.log(type);
 var radius = 5000;
 // var keyword = document.getElementById('gmap_keyword').value;
-// var lat = document.getElementById('lat').value;
-// var lng = document.getElementById('lng').value;
+var lat = document.getElementById('lat').value;
+var lng = document.getElementById('lng').value;
 var cur_location = new google.maps.LatLng(lat, lng);
 // prepare request to Places
 var request = {
@@ -135,9 +134,7 @@ types: [type]
 console.log(map);
 service = new google.maps.places.PlacesService(map);
 service.search(request, createMarkersATM);
-alert("Scroll down to view the search results");
 }
-
 
 function findFood() {
 // prepare variables (filter)
@@ -145,8 +142,8 @@ var type = "food";
 console.log(type);
 var radius = 5000;
 // var keyword = document.getElementById('gmap_keyword').value;
-// var lat = document.getElementById('lat').value;
-// var lng = document.getElementById('lng').value;
+var lat = document.getElementById('lat').value;
+var lng = document.getElementById('lng').value;
 var cur_location = new google.maps.LatLng(lat, lng);
 // prepare request to Places
 var request = {
@@ -161,8 +158,83 @@ types: [type]
 console.log(map);
 service = new google.maps.places.PlacesService(map);
 service.search(request, createMarkers);
-alert("Scroll down to view the map");
 }
+
+
+function findBar() {
+// prepare variables (filter)
+var type = "bar";
+console.log(type);
+var radius = 5000;
+// var keyword = document.getElementById('gmap_keyword').value;
+var lat = document.getElementById('lat').value;
+var lng = document.getElementById('lng').value;
+var cur_location = new google.maps.LatLng(lat, lng);
+// prepare request to Places
+var request = {
+location: cur_location,
+radius: radius,
+types: [type]
+};
+// if (keyword) {
+// request.keyword = [keyword];
+// }
+// send request
+console.log(map);
+service = new google.maps.places.PlacesService(map);
+service.search(request, createMarkers);
+}
+
+
+function findCafe() {
+// prepare variables (filter)
+var type = "cafe";
+console.log(type);
+var radius = 5000;
+// var keyword = document.getElementById('gmap_keyword').value;
+var lat = document.getElementById('lat').value;
+var lng = document.getElementById('lng').value;
+var cur_location = new google.maps.LatLng(lat, lng);
+// prepare request to Places
+var request = {
+location: cur_location,
+radius: radius,
+types: [type]
+};
+// if (keyword) {
+// request.keyword = [keyword];
+// }
+// send request
+console.log(map);
+service = new google.maps.places.PlacesService(map);
+service.search(request, createMarkers);
+}
+
+
+function findStore() {
+// prepare variables (filter)
+var type = "store";
+console.log(type);
+var radius = 5000;
+// var keyword = document.getElementById('gmap_keyword').value;
+var lat = document.getElementById('lat').value;
+var lng = document.getElementById('lng').value;
+var cur_location = new google.maps.LatLng(lat, lng);
+// prepare request to Places
+var request = {
+location: cur_location,
+radius: radius,
+types: [type]
+};
+// if (keyword) {
+// request.keyword = [keyword];
+// }
+// send request
+console.log(map);
+service = new google.maps.places.PlacesService(map);
+service.search(request, createMarkers);
+}
+
 
 function findHotel() {
 // prepare variables (filter)
@@ -170,8 +242,8 @@ var type = "lodging";
 console.log(type);
 var radius = 5000;
 // var keyword = document.getElementById('gmap_keyword').value;
-// var lat = document.getElementById('lat').value;
-// var lng = document.getElementById('lng').value;
+var lat = document.getElementById('lat').value;
+var lng = document.getElementById('lng').value;
 var cur_location = new google.maps.LatLng(lat, lng);
 // prepare request to Places
 var request = {
@@ -186,82 +258,6 @@ types: [type]
 console.log(map);
 service = new google.maps.places.PlacesService(map);
 service.search(request, createMarkersHotel);
-alert("Scroll down to view the search results");
-}
-
-function findStore() {
-// prepare variables (filter)
-var type = "store";
-console.log(type);
-var radius = 5000;
-// var keyword = document.getElementById('gmap_keyword').value;
-// var lat = document.getElementById('lat').value;
-// var lng = document.getElementById('lng').value;
-var cur_location = new google.maps.LatLng(lat, lng);
-// prepare request to Places
-var request = {
-location: cur_location,
-radius: radius,
-types: [type]
-};
-// if (keyword) {
-// request.keyword = [keyword];
-// }
-// send request
-console.log(map);
-service = new google.maps.places.PlacesService(map);
-service.search(request, createMarkers);
-alert("Scroll down to view the map");
-}
-
-function findBar() {
-// prepare variables (filter)
-var type = "bar";
-console.log(type);
-var radius = 5000;
-// var keyword = document.getElementById('gmap_keyword').value;
-// var lat = document.getElementById('lat').value;
-// var lng = document.getElementById('lng').value;
-var cur_location = new google.maps.LatLng(lat, lng);
-// prepare request to Places
-var request = {
-location: cur_location,
-radius: radius,
-types: [type]
-};
-// if (keyword) {
-// request.keyword = [keyword];
-// }
-// send request
-console.log(map);
-service = new google.maps.places.PlacesService(map);
-service.search(request, createMarkers);
-alert("Scroll down to view the map");
-}
-
-function findCafe() {
-// prepare variables (filter)
-var type = "restuarant";
-console.log(type);
-var radius = 5000;
-// var keyword = document.getElementById('gmap_keyword').value;
-// var lat = document.getElementById('lat').value;
-// var lng = document.getElementById('lng').value;
-var cur_location = new google.maps.LatLng(lat, lng);
-// prepare request to Places
-var request = {
-location: cur_location,
-radius: radius,
-types: [type]
-};
-// if (keyword) {
-// request.keyword = [keyword];
-// }
-// send request
-console.log(map);
-service = new google.maps.places.PlacesService(map);
-service.search(request, createMarkers);
-alert("Scroll down to view the map");
 }
 
 // create markers (from 'findPlaces' function)
@@ -315,6 +311,7 @@ infowindow.open(map,mark);
 infos.push(infowindow);
 }
 
+
 function directory(results)
 {
   var value="";
@@ -326,7 +323,7 @@ function directory(results)
     value=value+"<p><img src="+results[i].icon+" alt='' class='square' width=40 height=40><br><span class='title blue-text text-lighten-2'>"+results[i].name+"</span><br>Location: "+results[i].vicinity+"<br>Rating: "+results[i].rating+"</p>";
 
   }
-  document.getElementById('list').innerHTML = value;
+  // document.getElementById('list').innerHTML = value;
 
 }
 
@@ -339,12 +336,89 @@ function directoryHotel(results)
 
   for (var i = 0; i < results.length; i++) {
 
-    value=value+"<p>"+results[i].name+"</span><br>Location: "+results[i].vicinity+"<br>Rating: "+results[i].rating+"<br><button class=\"btn waves-effect waves-light col s12 blue darken-4\" onclick=addBook()>Add a booking</button></p>";
+    value=value+"<p><img src="+results[i].icon+" alt='' class='square' width=40 height=40><br><span class='title blue-text text-lighten-2'>"+results[i].name+"</span><br>Location: "+results[i].vicinity+"<br>Rating: "+results[i].rating+"<br><button class=\"btn waves-effect waves-light col s12 blue darken-4\" onclick=addBook()>Add a booking</button></p>";
 
   }
   document.getElementById('list').innerHTML = value;
 
 }
+
+
+function directoryATM(results)
+{
+  var value="";
+  console.log("im here");
+  console.log(results);
+
+  for (var i = 0; i < results.length; i++) {
+
+    value=value+"<p><img src="+results[i].icon+" alt='' class='square' width=40 height=40><br><span class='title blue-text text-lighten-2'>"+results[i].name+"</span><br>Location: "+results[i].vicinity+"<br>Rating: "+results[i].rating+"<br><button id = \"btn-atm\" class=\"btn waves-effect waves-light col s12 blue darken-4\" onclick=requestCard()>Request Card</button></p>";
+
+
+  }
+  document.getElementById('list').innerHTML = value;
+
+}
+
+
+
+// create markers (from 'findPlaces' function)
+function createMarkers(results, status) {
+
+  directory(results);
+
+
+
+
+if (status == google.maps.places.PlacesServiceStatus.OK) {
+// if we have found something - clear map (overlays)
+clearOverlays();
+// and create new markers by search result
+for (var i = 0; i < results.length; i++) {
+
+createMarker(results[i]);
+// $("#list").append( "< text</");
+// document.getElementById("list").innerHTML = "some text";
+// value=value+"<p><img src="+results[i].icon+" alt='' class='circle'><span class='title red-text text-lighten-2'>"+results[i].name+"</span>Location: "+results[i].vicinity+"</p>";
+}
+// $("#list").append( "< text</");
+// document.getElementById("list").innerHTML = "some text";
+
+}
+// document.getElementById("list").innerHTML = "some text";
+// $("#list").append( "< text</");
+// document.getElementById('list').innerHTML = "some text";
+
+}
+
+
+// creare single marker function
+function createMarker(obj) {
+// prepare new Marker object
+var mark = new google.maps.Marker({
+position: obj.geometry.location,
+map: map,
+title: obj.name,
+animation: google.maps.Animation.BOUNCE
+});
+markers.push(mark);
+// prepare info window
+var infowindow = new google.maps.InfoWindow({
+
+content: '<div><img src="' + obj.icon + '" heigh=30 width=30/><br>' + obj.name +
+'<br>Rating: ' + obj.rating + '<br>Vicinity: ' + obj.vicinity + '</div>'
+});
+// add event handler to current marker
+google.maps.event.addListener(mark, 'click', function() {
+clearInfos();
+infowindow.open(map,mark);
+});
+infos.push(infowindow);
+}
+
+
+
+
 
 
 // create markers (from 'findPlaces' function)
@@ -401,6 +475,11 @@ infos.push(infowindow);
 
 
 
+
+
+
+
+
 // create markers (from 'findPlaces' function)
 function createMarkersATM(results, status) {
 
@@ -454,21 +533,9 @@ infos.push(infowindow);
 }
 
 
-function directoryATM(results)
-{
-  var value="";
-  console.log("im here");
-  console.log(results);
-
-  for (var i = 0; i < results.length; i++) {
-
-    value=value+"<p><img src="+results[i].icon+" alt='' class='square' width=40 height=40><br><span class='title blue-text text-lighten-2'>"+results[i].name+"</span><br>Location: "+results[i].vicinity+"<br>Rating: "+results[i].rating+"<br><button id = \"btn-atm\" class=\"btn waves-effect waves-light col s12 blue darken-4\" onclick=requestCard()>Request Card</button></p>";
 
 
-  }
-  document.getElementById('list').innerHTML = value;
 
-}
 
 
 
@@ -486,19 +553,19 @@ navigator.contacts.pickContact(function(contact){
 }
 }
 
-function onSuccess(contacts) {
-    alert('Found ' + contacts.length + ' contacts.');
-};
+// function onSuccess(contacts) {
+//     alert('Found ' + contacts.length + ' contacts.');
+// };
 
-function onError(contactError) {
-    alert('onError!');
-};
+// function onError(contactError) {
+//     alert('onError!');
+// };
 
-// find all contacts with 'Bob' in any name field
-var options      = new ContactFindOptions();
-options.filter   = "Bob";
-options.multiple = true;
-options.desiredFields = [navigator.contacts.fieldType.id];
-options.hasPhoneNumber = true;
-var fields       = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
-navigator.contacts.find(fields, onSuccess, onError, options);
+// // find all contacts with 'Bob' in any name field
+// var options      = new ContactFindOptions();
+// options.filter   = "Bob";
+// options.multiple = true;
+// options.desiredFields = [navigator.contacts.fieldType.id];
+// options.hasPhoneNumber = true;
+// var fields       = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
+// navigator.contacts.find(fields, onSuccess, onError, options);
