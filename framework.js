@@ -1,24 +1,31 @@
-      var lat;
-      var lng;
-      var map;
-      // var markers = Array();
+var geocoder;
+var map;
+var markers = Array();
 var infos = Array();
+var value="";
+var lat;
+var long;
+
 
 
 function myLocation() {
+
 navigator.geolocation.getCurrentPosition(onSuccess, onError);
+
 }
 
 
 var onSuccess = function(position) {
-      lat = position.coords.latitude;
-      lng = position.coords.longitude;
 
-      console.log(lat);
-      console.log(lng)
+
+      lat = position.coords.latitude;
+      long = position.coords.longitude;
 
       initMap();
+
     };
+
+
 
     // onError Callback receives a PositionError object
     //
@@ -26,6 +33,8 @@ var onSuccess = function(position) {
         alert('code: '    + error.code    + '\n' +
               'message: ' + error.message + '\n');
     }
+
+
 
 
 
@@ -62,8 +71,8 @@ var marker = new google.maps.Marker({
  marker.setMap(map);
 
     }
-
-    function clearOverlays() {
+// clear overlays function
+function clearOverlays() {
 if (markers) {
 for (i in markers) {
 markers[i].setMap(null);
@@ -83,32 +92,35 @@ infos[i].close();
 }
 }
 
-        // Try HTML5 geolocation.
-      //   if (navigator.geolocation) {
-      //     navigator.geolocation.getCurrentPosition(function(position) {
-      //       var pos = {
-      //         lat: position.coords.latitude,
-      //         lng: position.coords.longitude
-      //       };
+// find address function
+function findAddress() {
 
-      //       infoWindow.setPosition(pos);
-      //       infoWindow.setContent('Location found.');
-      //       map.setCenter(pos);
-      //     }, function() {
-      //       handleLocationError(true, infoWindow, map.getCenter());
-      //     });
-      //   } else {
-      //     // Browser doesn't support Geolocation
-      //     handleLocationError(false, infoWindow, map.getCenter());
-      //   }
-      // }
+  // google.maps.event.addDomListener(window, 'load', initialize);
+  initialize();
 
-      // function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-      //   infoWindow.setPosition(pos);
-      //   infoWindow.setContent(browserHasGeolocation ?
-      //                         'Error: The Geolocation service failed.' :
-      //                         'Error: Your browser doesn\'t support geolocation.');
-      // }
+var address = document.getElementById("search").value;
+// script uses our 'geocoder' in order to find location by address name
+geocoder.geocode( { 'address': address}, function(results, status) {
+if (status == google.maps.GeocoderStatus.OK) { // and, if everything is ok
+// we will center map
+var addrLocation = results[0].geometry.location;
+map.setCenter(addrLocation);
+// store current coordinates into hidden variables
+document.getElementById('lat').value = results[0].geometry.location.lat();
+document.getElementById('lng').value = results[0].geometry.location.lng();
+// and then - add new custom marker
+var addrMarker = new google.maps.Marker({
+position: addrLocation,
+map: map,
+title: results[0].formatted_address
+// icon: 'marker.png'
+});
+} else {
+// alert('Geocode was not successful for the following reason: ' + status);
+}
+});
+}
+
 
 
 // find custom places function
@@ -118,8 +130,8 @@ var type = "atm";
 console.log(type);
 var radius = 5000;
 // var keyword = document.getElementById('gmap_keyword').value;
-// var lat = document.getElementById('lat').value;
-// var lng = document.getElementById('lng').value;
+var lat = document.getElementById('lat').value;
+var lng = document.getElementById('long').value;
 var cur_location = new google.maps.LatLng(lat, lng);
 // prepare request to Places
 var request = {
@@ -128,14 +140,63 @@ radius: radius,
 types: [type]
 };
 // if (keyword) {
-request.keyword = [keyword];
+// request.keyword = [keyword];
 // }
 // send request
 console.log(map);
 service = new google.maps.places.PlacesService(map);
 service.search(request, createMarkersATM);
-alert("Kindly scroll down to view the map.");
 }
+
+function findBank() {
+// prepare variables (filter)
+var type = "bank";
+console.log(type);
+var radius = 5000;
+// var keyword = document.getElementById('gmap_keyword').value;
+var lat = document.getElementById('lat').value;
+var lng = document.getElementById('lng').value;
+var cur_location = new google.maps.LatLng(lat, lng);
+// prepare request to Places
+var request = {
+location: cur_location,
+radius: radius,
+types: [type]
+};
+// if (keyword) {
+// request.keyword = [keyword];
+// }
+// send request
+console.log(map);
+service = new google.maps.places.PlacesService(map);
+service.search(request, createMarkers);
+}
+
+
+function findBar() {
+// prepare variables (filter)
+var type = "bar";
+console.log(type);
+var radius = 5000;
+// var keyword = document.getElementById('gmap_keyword').value;
+var lat = document.getElementById('lat').value;
+var lng = document.getElementById('lng').value;
+var cur_location = new google.maps.LatLng(lat, lng);
+// prepare request to Places
+var request = {
+location: cur_location,
+radius: radius,
+types: [type]
+};
+// if (keyword) {
+// request.keyword = [keyword];
+// }
+// send request
+console.log(map);
+service = new google.maps.places.PlacesService(map);
+service.search(request, createMarkers);
+}
+
 
 function findFood() {
 // prepare variables (filter)
@@ -143,8 +204,8 @@ var type = "food";
 console.log(type);
 var radius = 5000;
 // var keyword = document.getElementById('gmap_keyword').value;
-// var lat = document.getElementById('lat').value;
-// var lng = document.getElementById('lng').value;
+var lat = document.getElementById('lat').value;
+var lng = document.getElementById('lng').value;
 var cur_location = new google.maps.LatLng(lat, lng);
 // prepare request to Places
 var request = {
@@ -159,19 +220,17 @@ types: [type]
 console.log(map);
 service = new google.maps.places.PlacesService(map);
 service.search(request, createMarkers);
-alert("Kindly scroll down to view the map.");
 }
 
 
-function findBar() {
+function findHospital() {
 // prepare variables (filter)
-myLocation();
-var type = "bar";
+var type = "hospital";
 console.log(type);
 var radius = 5000;
 // var keyword = document.getElementById('gmap_keyword').value;
-// var lat = document.getElementById('lat').value;
-// var lng = document.getElementById('lng').value;
+var lat = document.getElementById('lat').value;
+var lng = document.getElementById('lng').value;
 var cur_location = new google.maps.LatLng(lat, lng);
 // prepare request to Places
 var request = {
@@ -186,59 +245,6 @@ types: [type]
 console.log(map);
 service = new google.maps.places.PlacesService(map);
 service.search(request, createMarkers);
-alert("Kindly scroll down to view the map.");
-}
-
-
-function findCafe() {
-// prepare variables (filter)
-var type = "cafe";
-console.log(type);
-var radius = 5000;
-// var keyword = document.getElementById('gmap_keyword').value;
-// var lat = document.getElementById('lat').value;
-// var lng = document.getElementById('lng').value;
-var cur_location = new google.maps.LatLng(lat, lng);
-// prepare request to Places
-var request = {
-location: cur_location,
-radius: radius,
-types: [type]
-};
-// if (keyword) {
-// request.keyword = [keyword];
-// }
-// send request
-console.log(map);
-service = new google.maps.places.PlacesService(map);
-service.nearbySearch(request, createMarkers);
-alert("Kindly scroll down to view the map.");
-}
-
-
-function findStore() {
-// prepare variables (filter)
-var type = "store";
-console.log(type);
-var radius = 5000;
-// var keyword = document.getElementById('gmap_keyword').value;
-// var lat = document.getElementById('lat').value;
-// var lng = document.getElementById('lng').value;
-var cur_location = new google.maps.LatLng(lat, lng);
-// prepare request to Places
-var request = {
-location: cur_location,
-radius: radius,
-types: [type]
-};
-// if (keyword) {
-// request.keyword = [keyword];
-// }
-// send request
-console.log(map);
-service = new google.maps.places.PlacesService(map);
-service.search(request, createMarkers);
-alert("Kindly scroll down to view the map.");
 }
 
 
@@ -248,8 +254,8 @@ var type = "lodging";
 console.log(type);
 var radius = 5000;
 // var keyword = document.getElementById('gmap_keyword').value;
-// var lat = document.getElementById('lat').value;
-// var lng = document.getElementById('lng').value;
+var lat = document.getElementById('lat').value;
+var lng = document.getElementById('lng').value;
 var cur_location = new google.maps.LatLng(lat, lng);
 // prepare request to Places
 var request = {
@@ -264,60 +270,61 @@ types: [type]
 console.log(map);
 service = new google.maps.places.PlacesService(map);
 service.search(request, createMarkersHotel);
-alert("Kindly scroll down to view the map.");
 }
 
-
-
-// // create markers (from 'findPlaces' function)
-// function createMarkers(results, status) {
-//   alert("creating markers");
-// alert(results);
-// alert(status);
-// console.log(status);
-// if (status == google.maps.places.PlacesServiceStatus.OK) {
-// // clearOverlays();
-
-// for (var i = 0; i < results.length; i++) {
-
-// createMarker(results[i]);
-
+function findPolice() {
+// prepare variables (filter)
+var type = "police";
+console.log(type);
+var radius = 5000;
+// var keyword = document.getElementById('gmap_keyword').value;
+var lat = document.getElementById('lat').value;
+var lng = document.getElementById('lng').value;
+var cur_location = new google.maps.LatLng(lat, lng);
+// prepare request to Places
+var request = {
+location: cur_location,
+radius: radius,
+types: [type]
+};
+// if (keyword) {
+// request.keyword = [keyword];
 // }
+// send request
+console.log(map);
+service = new google.maps.places.PlacesService(map);
+service.search(request, createMarkers);
+}
 
-
+function findUniversity() {
+// prepare variables (filter)
+var type = "university";
+console.log(type);
+var radius = 15000;
+// var keyword = document.getElementById('gmap_keyword').value;
+var lat = document.getElementById('lat').value;
+var lng = document.getElementById('lng').value;
+var cur_location = new google.maps.LatLng(lat, lng);
+// prepare request to Places
+var request = {
+location: cur_location,
+radius: radius,
+types: [type]
+};
+// if (keyword) {
+// request.keyword = [keyword];
 // }
-
-// }
-
-// function createMarker(obj) {
-//   alert("hey");
-// // prepare new Marker object
-// var mark = new google.maps.Marker({
-// position: obj.geometry.location,
-// map: map,
-// title: obj.name,
-// animation: google.maps.Animation.BOUNCE
-// });
-// markers.push(mark);
-// // prepare info window
-// var infowindow = new google.maps.InfoWindow({
-
-// content: '<div><img src="' + obj.icon + '" heigh=30 width=30/><br>' + obj.name +
-// '<br>Rating: ' + obj.rating + '<br>Vicinity: ' + obj.vicinity + '</div>'
-// });
-// // add event handler to current marker
-// google.maps.event.addListener(mark, 'click', function() {
-// clearInfos();
-// infowindow.open(map,mark);
-// });
-// infos.push(infowindow);
-// }
+// send request
+console.log(map);
+service = new google.maps.places.PlacesService(map);
+service.search(request, createMarkers);
+}
 
 
 function directory(results)
 {
   var value="";
-  console.log("im still here");
+  console.log("im here");
   console.log(results);
 
   for (var i = 0; i < results.length; i++) {
@@ -325,7 +332,7 @@ function directory(results)
     value=value+"<p><img src="+results[i].icon+" alt='' class='square' width=40 height=40><br><span class='title blue-text text-lighten-2'>"+results[i].name+"</span><br>Location: "+results[i].vicinity+"<br>Rating: "+results[i].rating+"</p>";
 
   }
-  // document.getElementById('list').innerHTML = value;
+  document.getElementById('list').innerHTML = value;
 
 }
 
@@ -366,10 +373,8 @@ function directoryATM(results)
 
 // create markers (from 'findPlaces' function)
 function createMarkers(results, status) {
-  console.log("Status is: "+status);
-  alert("Status is: "+ status);
-console.log(results);
-  // directory(results);
+
+  directory(results);
 
 
 
@@ -427,7 +432,7 @@ infos.push(infowindow);
 
 // create markers (from 'findPlaces' function)
 function createMarkersHotel(results, status) {
-console.log(results);
+
   directoryHotel(results);
 
 
@@ -543,21 +548,23 @@ infos.push(infowindow);
 
 
 
+// initialization
+// google.maps.event.addDomListener(window, 'load', initialize);
 
 
-// function onSuccess(contacts) {
-//     alert('Found ' + contacts.length + ' contacts.');
-// };
+// $(document).ready(function(){
+//    $('.collapsible').collapsible();
 
-// function onError(contactError) {
-//     alert('onError!');
-// };
+//  });
 
-// // find all contacts with 'Bob' in any name field
-// var options      = new ContactFindOptions();
-// options.filter   = "Bob";
-// options.multiple = true;
-// options.desiredFields = [navigator.contacts.fieldType.id];
-// options.hasPhoneNumber = true;
-// var fields       = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
-// navigator.contacts.find(fields, onSuccess, onError, options);
+//  $(document).ready(function(){
+//       $('.carousel').carousel();
+//     });
+
+//     $(document).ready(function(){
+//       $('ul.tabs').tabs();
+//     });
+
+
+
+

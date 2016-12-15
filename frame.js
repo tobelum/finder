@@ -2,52 +2,52 @@
       var lng;
       var map;
       // var markers = Array();
-var infos = Array();
+      var infos = Array();
 
 
-function myLocation() {
-navigator.geolocation.getCurrentPosition(onSuccess, onError);
-}
+      function myLocation() {
+        navigator.geolocation.getCurrentPosition(onSuccess, onError);
+      }
 
 
-var onSuccess = function(position) {
-      lat = position.coords.latitude;
-      lng = position.coords.longitude;
+      var onSuccess = function(position) {
+        lat = position.coords.latitude;
+        lng = position.coords.longitude;
 
-      console.log(lat);
-      console.log(lng)
+        console.log(lat);
+        console.log(lng)
 
-      initMap();
-    };
+        initMap();
+      };
 
     // onError Callback receives a PositionError object
     //
     function onError(error) {
-        alert('code: '    + error.code    + '\n' +
-              'message: ' + error.message + '\n');
+      alert('code: '    + error.code    + '\n' +
+        'message: ' + error.message + '\n');
     }
 
 
 
-      function initMap() {
-        //  map = new google.maps.Map(document.getElementById('map'), {
-        //   center: {lat,lng},
-        //   zoom: 16,
-        //   scrollwheel: false
-        // });
-        // var infoWindow = new google.maps.InfoWindow({map: map});
+    function initMap() {
+         map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat,lng},
+          zoom: 12,
+          scrollwheel: false
+        });
+        var infoWindow = new google.maps.InfoWindow({map: map});
 
 
 
 // prepare Geocoder
-geocoder = new google.maps.Geocoder();
-// set initial position (New York)
-var myLatlng = new google.maps.LatLng(5.760073,-0.221880);
-var myOptions = { // default map options
-zoom: 12,
-center: myLatlng,
-scrollwheel: false,
-mapTypeId: google.maps.MapTypeId.ROADMAP
+// geocoder = new google.maps.Geocoder();
+// // set initial position (New York)
+// var myLatlng = new google.maps.LatLng(lat,lng);
+// var myOptions = { // default map options
+//   zoom: 12,
+//   center: myLatlng,
+//   scrollwheel: false,
+//   mapTypeId: google.maps.MapTypeId.ROADMAP
 
 };
 
@@ -58,29 +58,29 @@ var marker = new google.maps.Marker({
   position: myLatlng,
   map: map,
   // animation: google.maps.Animation.BOUNCE
- });
- marker.setMap(map);
+});
+marker.setMap(map);
 
+
+
+function clearOverlays() {
+  if (markers) {
+    for (i in markers) {
+      markers[i].setMap(null);
     }
-
-    function clearOverlays() {
-if (markers) {
-for (i in markers) {
-markers[i].setMap(null);
-}
-markers = [];
-infos = [];
-}
+    markers = [];
+    infos = [];
+  }
 }
 // clear infos function
 function clearInfos() {
-if (infos) {
-for (i in infos) {
-if (infos[i].getMap()) {
-infos[i].close();
-}
-}
-}
+  if (infos) {
+    for (i in infos) {
+      if (infos[i].getMap()) {
+        infos[i].close();
+      }
+    }
+  }
 }
 
         // Try HTML5 geolocation.
@@ -122,13 +122,14 @@ var radius = 5000;
 // var lng = document.getElementById('lng').value;
 var cur_location = new google.maps.LatLng(lat, lng);
 // prepare request to Places
+
 var request = {
-location: cur_location,
-radius: radius,
-types: [type]
+  location: cur_location,
+  radius: radius,
+  types: [type]
 };
 // if (keyword) {
-request.keyword = [keyword];
+  request.keyword = [keyword];
 // }
 // send request
 console.log(map);
@@ -148,9 +149,9 @@ var radius = 5000;
 var cur_location = new google.maps.LatLng(lat, lng);
 // prepare request to Places
 var request = {
-location: cur_location,
-radius: radius,
-types: [type]
+  location: cur_location,
+  radius: radius,
+  types: [type]
 };
 // if (keyword) {
 // request.keyword = [keyword];
@@ -165,7 +166,16 @@ alert("Kindly scroll down to view the map.");
 
 function findBar() {
 // prepare variables (filter)
-myLocation();
+var lati;
+var lngd;
+navigator.geolocation.getCurrentPosition(onSuccess, onError);
+var onSuccess = function(position) {
+         lati = position.coords.latitude;
+        lngd = position.coords.longitude;
+
+      };
+
+console.log("lat");
 var type = "bar";
 console.log(type);
 var radius = 5000;
@@ -173,11 +183,13 @@ var radius = 5000;
 // var lat = document.getElementById('lat').value;
 // var lng = document.getElementById('lng').value;
 var cur_location = new google.maps.LatLng(lat, lng);
+
+console.log("lat: "+lati +"Lon: "+lngd);
 // prepare request to Places
 var request = {
-location: cur_location,
-radius: radius,
-types: [type]
+  location: cur_location,
+  radius: radius,
+  types: [type]
 };
 // if (keyword) {
 // request.keyword = [keyword];
@@ -201,9 +213,9 @@ var radius = 5000;
 var cur_location = new google.maps.LatLng(lat, lng);
 // prepare request to Places
 var request = {
-location: cur_location,
-radius: radius,
-types: [type]
+  location: cur_location,
+  radius: radius,
+  types: [type]
 };
 // if (keyword) {
 // request.keyword = [keyword];
@@ -227,9 +239,9 @@ var radius = 5000;
 var cur_location = new google.maps.LatLng(lat, lng);
 // prepare request to Places
 var request = {
-location: cur_location,
-radius: radius,
-types: [type]
+  location: cur_location,
+  radius: radius,
+  types: [type]
 };
 // if (keyword) {
 // request.keyword = [keyword];
@@ -253,9 +265,9 @@ var radius = 5000;
 var cur_location = new google.maps.LatLng(lat, lng);
 // prepare request to Places
 var request = {
-location: cur_location,
-radius: radius,
-types: [type]
+  location: cur_location,
+  radius: radius,
+  types: [type]
 };
 // if (keyword) {
 // request.keyword = [keyword];
@@ -368,19 +380,19 @@ function directoryATM(results)
 function createMarkers(results, status) {
   console.log("Status is: "+status);
   alert("Status is: "+ status);
-console.log(results);
+  console.log(results);
   // directory(results);
 
 
 
 
-if (status == google.maps.places.PlacesServiceStatus.OK) {
+  if (status == google.maps.places.PlacesServiceStatus.OK) {
 // if we have found something - clear map (overlays)
 clearOverlays();
 // and create new markers by search result
 for (var i = 0; i < results.length; i++) {
 
-createMarker(results[i]);
+  createMarker(results[i]);
 // $("#list").append( "< text</");
 // document.getElementById("list").innerHTML = "some text";
 // value=value+"<p><img src="+results[i].icon+" alt='' class='circle'><span class='title red-text text-lighten-2'>"+results[i].name+"</span>Location: "+results[i].vicinity+"</p>";
@@ -400,22 +412,22 @@ createMarker(results[i]);
 function createMarker(obj) {
 // prepare new Marker object
 var mark = new google.maps.Marker({
-position: obj.geometry.location,
-map: map,
-title: obj.name,
-animation: google.maps.Animation.BOUNCE
+  position: obj.geometry.location,
+  map: map,
+  title: obj.name,
+  animation: google.maps.Animation.BOUNCE
 });
 markers.push(mark);
 // prepare info window
 var infowindow = new google.maps.InfoWindow({
 
-content: '<div><img src="' + obj.icon + '" heigh=30 width=30/><br>' + obj.name +
-'<br>Rating: ' + obj.rating + '<br>Vicinity: ' + obj.vicinity + '</div>'
+  content: '<div><img src="' + obj.icon + '" heigh=30 width=30/><br>' + obj.name +
+  '<br>Rating: ' + obj.rating + '<br>Vicinity: ' + obj.vicinity + '</div>'
 });
 // add event handler to current marker
 google.maps.event.addListener(mark, 'click', function() {
-clearInfos();
-infowindow.open(map,mark);
+  clearInfos();
+  infowindow.open(map,mark);
 });
 infos.push(infowindow);
 }
@@ -427,17 +439,17 @@ infos.push(infowindow);
 
 // create markers (from 'findPlaces' function)
 function createMarkersHotel(results, status) {
-console.log(results);
+  console.log(results);
   directoryHotel(results);
 
 
-if (status == google.maps.places.PlacesServiceStatus.OK) {
+  if (status == google.maps.places.PlacesServiceStatus.OK) {
 // if we have found something - clear map (overlays)
 clearOverlays();
 // and create new markers by search result
 for (var i = 0; i < results.length; i++) {
 
-createMarkerHotel(results[i]);
+  createMarkerHotel(results[i]);
 // $("#list").append( "< text</");
 // document.getElementById("list").innerHTML = "some text";
 // value=value+"<p><img src="+results[i].icon+" alt='' class='circle'><span class='title red-text text-lighten-2'>"+results[i].name+"</span>Location: "+results[i].vicinity+"</p>";
@@ -457,22 +469,22 @@ createMarkerHotel(results[i]);
 function createMarkerHotel(obj) {
 // prepare new Marker object
 var mark = new google.maps.Marker({
-position: obj.geometry.location,
-map: map,
-title: obj.name,
-animation: google.maps.Animation.BOUNCE
+  position: obj.geometry.location,
+  map: map,
+  title: obj.name,
+  animation: google.maps.Animation.BOUNCE
 });
 markers.push(mark);
 // prepare info window
 var infowindow = new google.maps.InfoWindow({
 
-content: '<div><img src="' + obj.icon + '" heigh=30 width=30/><br>' + obj.name +
-'<br>Rating: ' + obj.rating + '<br>Vicinity: ' + obj.vicinity + '</div>'
+  content: '<div><img src="' + obj.icon + '" heigh=30 width=30/><br>' + obj.name +
+  '<br>Rating: ' + obj.rating + '<br>Vicinity: ' + obj.vicinity + '</div>'
 });
 // add event handler to current marker
 google.maps.event.addListener(mark, 'click', function() {
-clearInfos();
-infowindow.open(map,mark);
+  clearInfos();
+  infowindow.open(map,mark);
 });
 infos.push(infowindow);
 }
@@ -490,13 +502,13 @@ function createMarkersATM(results, status) {
   directoryATM(results);
 
 
-if (status == google.maps.places.PlacesServiceStatus.OK) {
+  if (status == google.maps.places.PlacesServiceStatus.OK) {
 // if we have found something - clear map (overlays)
 clearOverlays();
 // and create new markers by search result
 for (var i = 0; i < results.length; i++) {
 
-createMarkerATM(results[i]);
+  createMarkerATM(results[i]);
 // $("#list").append( "< text</");
 // document.getElementById("list").innerHTML = "some text";
 // value=value+"<p><img src="+results[i].icon+" alt='' class='circle'><span class='title red-text text-lighten-2'>"+results[i].name+"</span>Location: "+results[i].vicinity+"</p>";
@@ -516,22 +528,22 @@ createMarkerATM(results[i]);
 function createMarkerATM(obj) {
 // prepare new Marker object
 var mark = new google.maps.Marker({
-position: obj.geometry.location,
-map: map,
-title: obj.name,
-animation: google.maps.Animation.BOUNCE
+  position: obj.geometry.location,
+  map: map,
+  title: obj.name,
+  animation: google.maps.Animation.BOUNCE
 });
 markers.push(mark);
 // prepare info window
 var infowindow = new google.maps.InfoWindow({
 
-content: '<div><img src="' + obj.icon + '" heigh=30 width=30 /><br>' + obj.name +
-'<br>Rating: ' + obj.rating + '<br>Vicinity: ' + obj.vicinity + '</div>'
+  content: '<div><img src="' + obj.icon + '" heigh=30 width=30 /><br>' + obj.name +
+  '<br>Rating: ' + obj.rating + '<br>Vicinity: ' + obj.vicinity + '</div>'
 });
 // add event handler to current marker
 google.maps.event.addListener(mark, 'click', function() {
-clearInfos();
-infowindow.open(map,mark);
+  clearInfos();
+  infowindow.open(map,mark);
 });
 infos.push(infowindow);
 }
